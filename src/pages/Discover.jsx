@@ -7,7 +7,7 @@ import {
   FaChevronRight,
   FaCrown,
 } from "react-icons/fa6";
-import { useNavigate } from "react-router";
+import Navbar from "../components/Navbar";
 
 const trendingSongs = [
   {
@@ -33,9 +33,6 @@ const trendingSongs = [
 ];
 
 const Discover = () => {
-
-  const nvigate = useNavigate()
-
 
   return (
     <div className="min-h-screen bg-[#0b0b0d] text-white relative overflow-hidden">
@@ -77,78 +74,7 @@ const Discover = () => {
         >
           {/* ================= NAVBAR ================= */}
 
-          <header
-            className="
-              h-[76px]
-              px-7
-              md:px-10
-              border-b
-              border-white/[0.06]
-              flex
-              items-center
-              justify-between
-            "
-          >
-            {/* Logo */}
-
-            <div className="flex items-center gap-3">
-              <FaDesktop className="text-lg text-white/80" />
-
-              <h1 className="text-xl md:text-2xl font-bold text-[#c29cff]">
-                MusicHub
-              </h1>
-            </div>
-
-            {/* Navigation */}
-
-            <nav className="hidden md:flex items-center gap-10">
-              <button
-                className="
-                  text-sm
-                  font-semibold
-                  text-white
-                  border-b-2
-                  border-[#a47aff]
-                  pb-2
-                "
-              >
-                Home
-              </button>
-
-              <button className="text-sm text-white/50 hover:text-white transition">
-                Search
-              </button>
-
-              <button className="text-sm text-white/50 hover:text-white transition">
-                Favorites
-              </button>
-            </nav>
-
-            {/* Right */}
-
-            <div className="flex items-center gap-5">
-              <button className="text-white/60 hover:text-white transition">
-                <FaBell />
-              </button>
-
-              <div
-                className="
-                  w-9
-                  h-9
-                  rounded-full
-                  border
-                  border-white/10
-                  bg-[#242126]
-                  flex
-                  items-center
-                  justify-center
-                  text-sm
-                "
-              >
-                👤
-              </div>
-            </div>
-          </header>
+          <Navbar />
 
           {/* ================= MAIN ================= */}
 

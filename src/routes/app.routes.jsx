@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import MainLayout from "../layout/MainLayout";
 import Discover from "../pages/Discover";
 import Favorites from "../pages/Favorites";
+import Search from "../pages/Search";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "favorite",
         element: <Favorites />,
+      },
+      {
+        path: "search",
+        element: <Search />,
       },
     ],
   },
