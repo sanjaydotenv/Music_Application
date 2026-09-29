@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   FaDesktop,
   FaMusic,
@@ -13,10 +13,23 @@ import {
 import { useNavigate } from "react-router";
 
 const Register = () => {
+  const [role, setRole] = useState("listener");
+  const [formData, setFormData] = useState({ role });
+  const formRef = useRef(null)
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem("userData", JSON.stringify(formData));
+    formRef.current.reset()
+    navigate("/main")
+  };
 
   return (
     <div className="min-h-screen bg-[#0b0b0d] text-white overflow-hidden relative">
@@ -82,24 +95,31 @@ const Register = () => {
             <div className="grid grid-cols-2 gap-3 mb-5">
               {/* Listener */}
               <button
+                onClick={() => {
+                  setRole("listener");
+                  setFormData((prev) => ({ ...prev, role: "listener" }));
+                }}
                 type="button"
-                className="
+                className={`
+                  ${role === "listener" ? "border-[#713bd0] hover:bg-[#2b2041] border bg-[#241b36] shadow-[0_0_20px_rgba(125,70,220,0.12)]" : "bg-[#111014]"}
                   h-20
                   rounded-lg
                   border
-                  border-[#713bd0]
-                  bg-[#241b36]
-                  shadow-[0_0_20px_rgba(125,70,220,0.12)]
+                  border-white/10
+                  
+                  
                   flex
                   flex-col
                   items-center
                   justify-center
                   gap-2
                   transition
-                  hover:bg-[#2b2041]
-                "
+                  
+                `}
               >
-                <FaMusic className="text-xl text-[#c29cff]" />
+                <FaMusic
+                  className={`text-xl ${role === "listener" ? "text-[#c29cff]" : ""}`}
+                />
 
                 <span className="text-xs tracking-widest font-semibold text-white/80">
                   LISTENER
@@ -108,23 +128,30 @@ const Register = () => {
 
               {/* Artist */}
               <button
+                onClick={() => {
+                  setRole("artist");
+                  setFormData((prev) => ({ ...prev, role: "artist" }));
+                }}
                 type="button"
-                className="
+                className={`
+                  ${role === "artist" ? "border-[#713bd0] hover:bg-[#2b2041] border bg-[#241b36] shadow-[0_0_20px_rgba(125,70,220,0.12)]" : "bg-[#111014]"}
                   h-20
                   rounded-lg
                   border
                   border-white/10
-                  bg-[#111014]
+                  
+                  
                   flex
                   flex-col
                   items-center
                   justify-center
                   gap-2
                   transition
-                  hover:border-white/20
-                "
+                `}
               >
-                <FaMicrophone className="text-xl text-white/55" />
+                <FaMicrophone
+                  className={`text-xl ${role === "artist" ? "text-[#c29cff]" : ""}`}
+                />
 
                 <span className="text-xs tracking-widest font-semibold text-white/55">
                   ARTIST
@@ -133,7 +160,7 @@ const Register = () => {
             </div>
 
             {/* Form */}
-            <div className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               {/* Full Name */}
               <div className="relative">
                 <FaUser
@@ -148,6 +175,8 @@ const Register = () => {
                 />
 
                 <input
+                  name="fullName"
+                  onInput={handleChange}
                   type="text"
                   placeholder="Full Name"
                   className="
@@ -185,6 +214,8 @@ const Register = () => {
                 />
 
                 <input
+                  name="username"
+                  onInput={handleChange}
                   type="text"
                   placeholder="Username"
                   className="
@@ -222,6 +253,8 @@ const Register = () => {
                 />
 
                 <input
+                  name="email"
+                  onInput={handleChange}
                   type="email"
                   placeholder="Email Address"
                   className="
@@ -259,6 +292,8 @@ const Register = () => {
                 />
 
                 <input
+                  name="password"
+                  onInput={handleChange}
                   type="password"
                   placeholder="Password"
                   className="
@@ -281,36 +316,35 @@ const Register = () => {
                   "
                 />
               </div>
-            </div>
 
-            {/* Terms */}
-            <div className="flex items-center gap-2 mt-5">
-              <input
-                type="checkbox"
-                className="
+              {/* Terms */}
+              <div className="flex items-center gap-2 mt-5">
+                <input
+                  type="checkbox"
+                  className="
                   w-4
                   h-4
                   accent-[#7c3aed]
                   cursor-pointer
                 "
-              />
+                />
 
-              <p className="text-xs text-white/45">
-                I agree to the{" "}
-                <span className="text-white/70 cursor-pointer">
-                  Terms of Service
-                </span>{" "}
-                and{" "}
-                <span className="text-white/70 cursor-pointer">
-                  Privacy Policy.
-                </span>
-              </p>
-            </div>
+                <p className="text-xs text-white/45">
+                  I agree to the{" "}
+                  <span className="text-white/70 cursor-pointer">
+                    Terms of Service
+                  </span>{" "}
+                  and{" "}
+                  <span className="text-white/70 cursor-pointer">
+                    Privacy Policy.
+                  </span>
+                </p>
+              </div>
 
-            {/* Register Button */}
-            <button
-              type="button"
-              className="
+              {/* Register Button */}
+              <button
+                type="submit"
+                className="
                 w-full
                 h-12
                 mt-6
@@ -330,17 +364,18 @@ const Register = () => {
                 hover:brightness-110
                 transition
               "
-            >
-              Register
-              <FaArrowRight className="text-xs" />
-            </button>
+              >
+                Register
+                <FaArrowRight className="text-xs" />
+              </button>
+            </form>
 
             {/* Login */}
             <div className="text-center mt-5">
               <p className="text-xs text-white/45">
                 Already have an account?{" "}
                 <button
-                onClick={() => navigate("/login")}
+                  onClick={() => navigate("/login")}
                   type="button"
                   className="
                     text-white/80

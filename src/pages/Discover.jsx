@@ -7,6 +7,7 @@ import {
   FaChevronRight,
   FaCrown,
 } from "react-icons/fa6";
+import { useNavigate } from "react-router";
 
 const trendingSongs = [
   {
@@ -32,6 +33,10 @@ const trendingSongs = [
 ];
 
 const Discover = () => {
+
+  const nvigate = useNavigate()
+
+
   return (
     <div className="min-h-screen bg-[#0b0b0d] text-white relative overflow-hidden">
       {/* ================= BACKGROUND ================= */}
@@ -207,7 +212,7 @@ const Discover = () => {
                     mt-8
                   "
                 >
-                  <FaSearch
+                  {/* <FaSearch
                     className="
                       absolute
                       left-4
@@ -216,7 +221,7 @@ const Discover = () => {
                       text-sm
                       text-white/30
                     "
-                  />
+                  /> */}
 
                   <input
                     type="text"
