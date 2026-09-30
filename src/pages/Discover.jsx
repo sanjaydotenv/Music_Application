@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   FaDesktop,
   FaBell,
   FaPlay,
-//   FaSearch,
+  //   FaSearch,
   FaChevronRight,
   FaCrown,
 } from "react-icons/fa6";
 import Navbar from "../components/Navbar";
+import Toaster from "../layout/Toaster";
+import { authContextData } from "../context/AuthContext";
 
 const trendingSongs = [
   {
@@ -33,10 +35,12 @@ const trendingSongs = [
 ];
 
 const Discover = () => {
+  const { loginTrue } = useContext(authContextData);
 
   return (
     <div className="min-h-screen bg-[#0b0b0d] text-white relative overflow-hidden">
       {/* ================= BACKGROUND ================= */}
+      {loginTrue && <Toaster color="green" msg={"Login Successfully"} />}
 
       <div
         className="fixed inset-0 opacity-40 pointer-events-none"

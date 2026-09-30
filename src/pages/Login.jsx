@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   FaDesktop,
   FaMusic,
@@ -12,14 +12,56 @@ import {
 } from "react-icons/fa6";
 import musicImage from "../assets/musicImage.jpeg";
 import { useNavigate } from "react-router";
+import Toaster from "../layout/Toaster";
+import { authContextData } from "../context/AuthContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const formRef = useRef(null);
 
-    const navigate = useNavigate()
+  const { loginFalse, setLoginmFalse, loginTrue, setLoginTrue } =
+    useContext(authContextData);
 
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const RegisterData = JSON.parse(localStorage.getItem("userData"));
+
+    if (
+      RegisterData.email !== formState.email ||
+      RegisterData.password !== formState.password
+    ) {
+      setLoginmFalse(true);
+
+      setTimeout(() => {
+        setLoginmFalse(false);
+      }, 1500);
+
+      return;
+    }
+    setLoginTrue(true);
+    navigate("/main");
+  };
 
   return (
     <div className="min-h-screen bg-[#0b0b0d] text-white overflow-hidden relative">
+      {loginFalse && (
+        <Toaster color={"red"} msg={"Invalid email or password"} />
+      )}
       {/* Background Dots */}
       <div
         className="absolute inset-0 opacity-50"
@@ -166,145 +208,156 @@ const Login = () => {
                   </p>
                 </div>
 
-                {/* Email */}
-                <div className="mb-5">
-                  <label className="block text-[9px] font-semibold text-white/60 mb-2 uppercase">
-                    Email Address
-                  </label>
-
-                  <div className="relative">
-                    <FaEnvelope
-                      className="
-                        absolute
-                        left-3
-                        top-1/2
-                        -translate-y-1/2
-                        text-xs
-                        text-white/30
-                      "
-                    />
-
-                    <input
-                      type="email"
-                      placeholder="name@example.com"
-                      className="
-                        w-full
-                        h-10
-                        rounded-md
-                        border
-                        border-white/10
-                        bg-[#101012]
-                        pl-9
-                        pr-3
-                        text-xs
-                        text-white
-                        placeholder:text-white/25
-                        outline-none
-                        focus:border-[#8144df]
-                        focus:ring-1
-                        focus:ring-[#8144df]/20
-                      "
-                    />
-                  </div>
-                </div>
-
-                {/* Password */}
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-[9px] font-semibold text-white/60 uppercase">
-                      Password
+                {/* FORM */}
+                <form ref={formRef} onSubmit={handleSubmit}>
+                  {/* Email */}
+                  <div className="mb-5">
+                    <label className="block text-[9px] font-semibold text-white/60 mb-2 uppercase">
+                      Email Address
                     </label>
 
-                    <button
-                      type="button"
-                      className="text-[8px] text-[#a985ff] hover:text-[#c2a8ff]"
-                    >
-                      Forgot Password?
-                    </button>
+                    <div className="relative">
+                      <FaEnvelope
+                        className="
+                          absolute
+                          left-3
+                          top-1/2
+                          -translate-y-1/2
+                          text-xs
+                          text-white/30
+                        "
+                      />
+
+                      <input
+                        name="email"
+                        value={formState.email}
+                        onChange={handleChange}
+                        type="email"
+                        placeholder="name@example.com"
+                        className="
+                          w-full
+                          h-10
+                          rounded-md
+                          border
+                          border-white/10
+                          bg-[#101012]
+                          pl-9
+                          pr-3
+                          text-xs
+                          text-white
+                          placeholder:text-white/25
+                          outline-none
+                          focus:border-[#8144df]
+                          focus:ring-1
+                          focus:ring-[#8144df]/20
+                        "
+                      />
+                    </div>
                   </div>
 
-                  <div className="relative">
-                    <FaLock
-                      className="
-                        absolute
-                        left-3
-                        top-1/2
-                        -translate-y-1/2
-                        text-xs
-                        text-white/30
-                      "
-                    />
+                  {/* Password */}
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="text-[9px] font-semibold text-white/60 uppercase">
+                        Password
+                      </label>
 
+                      <button
+                        type="button"
+                        className="text-[8px] text-[#a985ff] hover:text-[#c2a8ff]"
+                      >
+                        Forgot Password?
+                      </button>
+                    </div>
+
+                    <div className="relative">
+                      <FaLock
+                        className="
+                          absolute
+                          left-3
+                          top-1/2
+                          -translate-y-1/2
+                          text-xs
+                          text-white/30
+                        "
+                      />
+
+                      <input
+                        name="password"
+                        value={formState.password}
+                        onChange={handleChange}
+                        type="password"
+                        placeholder="••••••••"
+                        className="
+                          w-full
+                          h-10
+                          rounded-md
+                          border
+                          border-white/10
+                          bg-[#101012]
+                          pl-9
+                          pr-10
+                          text-xs
+                          text-white
+                          placeholder:text-white/25
+                          outline-none
+                          focus:border-[#8144df]
+                          focus:ring-1
+                          focus:ring-[#8144df]/20
+                        "
+                      />
+
+                      <FaEye
+                        className="
+                          absolute
+                          right-3
+                          top-1/2
+                          -translate-y-1/2
+                          text-xs
+                          text-white/30
+                          cursor-pointer
+                        "
+                      />
+                    </div>
+                  </div>
+
+                  {/* Remember Me */}
+                  <div className="flex items-center gap-2 mb-6">
                     <input
-                      type="password"
-                      placeholder="••••••••"
-                      className="
-                        w-full
-                        h-10
-                        rounded-md
-                        border
-                        border-white/10
-                        bg-[#101012]
-                        pl-9
-                        pr-10
-                        text-xs
-                        text-white
-                        placeholder:text-white/25
-                        outline-none
-                        focus:border-[#8144df]
-                        focus:ring-1
-                        focus:ring-[#8144df]/20
-                      "
+                      type="checkbox"
+                      className="w-3.5 h-3.5 accent-[#7c3aed]"
                     />
 
-                    <FaEye
-                      className="
-                        absolute
-                        right-3
-                        top-1/2
-                        -translate-y-1/2
-                        text-xs
-                        text-white/30
-                        cursor-pointer
-                      "
-                    />
+                    <span className="text-[9px] text-white/50">
+                      Remember Me
+                    </span>
                   </div>
-                </div>
 
-                {/* Remember Me */}
-                <div className="flex items-center gap-2 mb-6">
-                  <input
-                    type="checkbox"
-                    className="w-3.5 h-3.5 accent-[#7c3aed]"
-                  />
-
-                  <span className="text-[9px] text-white/50">Remember Me</span>
-                </div>
-
-                {/* Login Button */}
-                <button
-                  type="button"
-                  className="
-                    w-full
-                    h-11
-                    rounded-md
-                    bg-gradient-to-r
-                    from-[#914ff0]
-                    to-[#7338d9]
-                    text-xs
-                    font-semibold
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    shadow-[0_8px_25px_rgba(125,60,220,0.25)]
-                    hover:brightness-110
-                    transition
-                  "
-                >
-                  Login
-                  <FaArrowRight className="text-[9px]" />
-                </button>
+                  {/* Login Button */}
+                  <button
+                    type="submit"
+                    className="
+                      w-full
+                      h-11
+                      rounded-md
+                      bg-gradient-to-r
+                      from-[#914ff0]
+                      to-[#7338d9]
+                      text-xs
+                      font-semibold
+                      flex
+                      items-center
+                      justify-center
+                      gap-2
+                      shadow-[0_8px_25px_rgba(125,60,220,0.25)]
+                      hover:brightness-110
+                      transition
+                    "
+                  >
+                    Login
+                    <FaArrowRight className="text-[9px]" />
+                  </button>
+                </form>
 
                 {/* OR */}
                 <div className="flex items-center gap-3 my-6">
@@ -315,14 +368,12 @@ const Login = () => {
                   <div className="h-px flex-1 bg-white/[0.07]" />
                 </div>
 
-             
-
                 {/* Register */}
                 <div className="text-center mt-6">
                   <p className="text-[9px] text-white/40">
                     Don't have an account?{" "}
                     <button
-                    onClick={() => navigate("/")}
+                      onClick={() => navigate("/")}
                       type="button"
                       className="
                         ml-1
