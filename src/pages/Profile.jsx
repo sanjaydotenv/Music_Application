@@ -7,7 +7,7 @@ import {
   FaRightFromBracket,
   FaPen,
   FaLocationDot,
-  FaCalendar,
+  FaCalendarDays,
   FaLink,
   FaInstagram,
   FaTwitter,
@@ -15,114 +15,54 @@ import {
   FaHeart,
   FaPlay,
   FaEye,
+  FaHeadphones,
+  FaArrowTrendUp,
 } from "react-icons/fa6";
 
-const recentSongs = [
-  {
-    id: 1,
-    title: "Midnight Echo",
-    genre: "Synthwave",
-    plays: "1.6K",
-    likes: "342",
-    image:
-      "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=500&q=80",
-  },
-  {
-    id: 2,
-    title: "Rainy Window",
-    genre: "Lo-Fi",
-    plays: "3.2K",
-    likes: "721",
-    image:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=500&q=80",
-  },
-  {
-    id: 3,
-    title: "Neon Velocity",
-    genre: "Electronic",
-    plays: "5.4K",
-    likes: "1.1K",
-    image:
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=500&q=80",
-  },
-];
+import AsideNav from "../components/AsideNav";
 
 const Profile = () => {
   return (
     <div className="min-h-screen bg-[#0b0b0d] text-white">
       <div className="flex min-h-screen">
-        {/* ================= SIDEBAR ================= */}
+        {/* ================================================= */}
+        {/* SIDEBAR */}
+        {/* ================================================= */}
 
-        <aside className="fixed left-0 top-0 z-50 flex h-screen w-[220px] flex-col border-r border-white/10 bg-[#151516] px-4 py-6">
-          {/* Logo */}
+        <AsideNav />
 
-          <div className="mb-8 px-2">
-            <h1 className="text-[15px] font-bold">
-              Music<span className="text-violet-400">Hub</span>
-            </h1>
+        {/* ================================================= */}
+        {/* MAIN */}
+        {/* ================================================= */}
 
-            <p className="mt-0.5 text-[8px] text-gray-500">Artist Portal</p>
-          </div>
+        <main className="ml-[260px] min-h-screen flex-1">
+          {/* ================================================= */}
+          {/* TOP BAR */}
+          {/* ================================================= */}
 
-          {/* Navigation */}
+          <header className="sticky top-0 z-40 flex h-[72px] items-center justify-between border-b border-white/10 bg-[#0d0d0f]/95 px-8 backdrop-blur-xl">
+            {/* Search */}
 
-          <nav className="space-y-2">
-            <NavItem icon={<FaChartBar />} text="Dashboard" />
-
-            <NavItem icon={<FaMusic />} text="My Songs" />
-
-            <NavItem icon={<FaCloudArrowUp />} text="Upload Song" />
-
-            <NavItem icon={<FaUser />} text="Profile" active />
-          </nav>
-
-          {/* Artist */}
-
-          <div className="mt-auto">
-            <div className="mb-5 flex items-center gap-2 rounded-lg bg-white/[0.03] px-2.5 py-2">
-              <img
-                src="https://i.pravatar.cc/100?img=12"
-                alt="artist"
-                className="h-7 w-7 rounded-full object-cover"
-              />
-
-              <div>
-                <p className="text-[9px] font-semibold">Alex Rivera</p>
-
-                <p className="text-[7px] text-gray-500">Music Artist</p>
-              </div>
-            </div>
-
-            <button className="flex w-full items-center gap-2 px-2 py-2 text-[10px] text-gray-400 transition hover:text-red-400">
-              <FaRightFromBracket />
-              Logout
-            </button>
-          </div>
-        </aside>
-
-        {/* ================= MAIN ================= */}
-
-        <main className="ml-[220px] min-h-screen flex-1">
-          {/* TOP NAVBAR */}
-
-          <header className="flex h-[58px] items-center justify-between border-b border-white/10 bg-[#0d0d0f] px-7">
-            <div className="flex h-8 w-[270px] items-center rounded-full border border-white/5 bg-white/[0.04] px-3">
-              <span className="mr-2 text-[9px] text-gray-600">🔍</span>
+            <div className="flex h-11 w-[360px] items-center rounded-full border border-white/10 bg-white/[0.04] px-4">
+              <span className="mr-3 text-sm text-gray-500">🔍</span>
 
               <input
-                placeholder="Search your profile..."
-                className="w-full bg-transparent text-[9px] text-white outline-none placeholder:text-gray-600"
+                type="text"
+                placeholder="Search your music..."
+                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-600"
               />
             </div>
 
-            <div className="flex items-center gap-5">
-              <button className="text-xs text-gray-400 hover:text-white">
+            {/* Right */}
+
+            <div className="flex items-center gap-6">
+              <button className="text-lg text-gray-400 transition hover:text-white">
                 🔔
               </button>
 
-              <div className="h-7 w-7 overflow-hidden rounded-full border border-violet-400/40">
+              <div className="h-10 w-10 overflow-hidden rounded-full border border-violet-400/50">
                 <img
-                  src="https://i.pravatar.cc/100?img=12"
+                  src="https://i.pravatar.cc/200?img=12"
                   alt="profile"
                   className="h-full w-full object-cover"
                 />
@@ -130,173 +70,280 @@ const Profile = () => {
             </div>
           </header>
 
-          {/* ================= PROFILE CONTENT ================= */}
+          {/* ================================================= */}
+          {/* PAGE */}
+          {/* ================================================= */}
 
-          <section className="p-7">
+          <section className="px-8 py-10">
             {/* PAGE TITLE */}
 
-            <div className="mb-6">
-              <p className="mb-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-violet-400">
+            <div className="mb-8">
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-violet-400">
                 Artist Account
               </p>
 
-              <h2 className="text-2xl font-bold">My Profile</h2>
+              <h1 className="text-4xl font-bold tracking-tight">My Profile</h1>
 
-              <p className="mt-1 text-[10px] text-gray-500">
-                Manage your artist profile and public information.
+              <p className="mt-2 text-base text-gray-500">
+                Manage your artist identity and public information.
               </p>
             </div>
 
-            {/* ================= PROFILE HERO ================= */}
+            {/* ================================================= */}
+            {/* PROFILE HERO */}
+            {/* ================================================= */}
 
-            <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/5 bg-[#171719]">
-              {/* Background */}
+            <div className="relative mb-7 overflow-hidden rounded-2xl border border-white/10 bg-[#171719]">
+              {/* COVER */}
 
-              <div className="h-[150px] bg-gradient-to-r from-violet-950/80 via-[#241d35] to-[#111113]">
-                <div className="absolute right-20 top-[-80px] h-[230px] w-[230px] rounded-full bg-violet-500/10 blur-3xl" />
-              </div>
+              <div className="relative h-[230px] overflow-hidden bg-gradient-to-r from-[#241348] via-[#3a2067] to-[#111114]">
+                {/* Decorative circles */}
 
-              {/* Profile Content */}
+                <div className="absolute -right-20 -top-32 h-[420px] w-[420px] rounded-full bg-violet-500/20 blur-3xl" />
 
-              <div className="relative px-7 pb-6">
-                {/* Avatar */}
+                <div className="absolute left-[40%] top-[20px] h-[220px] w-[220px] rounded-full bg-fuchsia-500/10 blur-3xl" />
 
-                <div className="-mt-[55px] mb-4">
-                  <div className="relative inline-block">
-                    <img
-                      src="https://i.pravatar.cc/200?img=12"
-                      alt="Alex Rivera"
-                      className="h-[105px] w-[105px] rounded-full border-4 border-[#171719] object-cover"
+                {/* Music waves */}
+
+                <div className="absolute bottom-0 left-0 right-0 flex h-28 items-end justify-center gap-1 opacity-20">
+                  {Array.from({ length: 70 }).map((_, index) => (
+                    <div
+                      key={index}
+                      className="w-[3px] rounded-full bg-white"
+                      style={{
+                        height: `${20 + ((index * 17) % 70)}%`,
+                      }}
                     />
-
-                    <div className="absolute bottom-2 right-2 h-4 w-4 rounded-full border-2 border-[#171719] bg-green-500" />
-                  </div>
-                </div>
-
-                {/* Info */}
-
-                <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h1 className="text-xl font-bold">Alex Rivera</h1>
-
-                      <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-2 py-1 text-[7px] font-bold uppercase text-violet-400">
-                        Pro Artist
-                      </span>
-                    </div>
-
-                    <p className="mt-1 text-[10px] text-gray-500">
-                      @alexrivera
-                    </p>
-
-                    <p className="mt-3 max-w-xl text-[10px] leading-5 text-gray-400">
-                      Independent music artist creating atmospheric electronic
-                      sounds, dreamy synths and late-night melodies.
-                    </p>
-
-                    {/* Meta */}
-
-                    <div className="mt-4 flex flex-wrap gap-4">
-                      <div className="flex items-center gap-1.5 text-[9px] text-gray-500">
-                        <FaLocationDot className="text-violet-400" />
-                        Los Angeles, CA
-                      </div>
-
-                      <div className="flex items-center gap-1.5 text-[9px] text-gray-500">
-                        <FaCalendar className="text-violet-400" />
-                        Joined March 2024
-                      </div>
-
-                      <div className="flex items-center gap-1.5 text-[9px] text-gray-500">
-                        <FaLink className="text-violet-400" />
-                        alexrivera.music
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Edit */}
-
-                  <button className="flex h-9 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-5 text-[9px] font-semibold text-gray-300 transition hover:border-violet-500/40 hover:bg-violet-500/10 hover:text-violet-400">
-                    <FaPen />
-                    Edit Profile
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* ================= STATS ================= */}
-
-            <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-              <ProfileStat title="Total Songs" value="42" icon={<FaMusic />} />
-
-              <ProfileStat
-                title="Total Plays"
-                value="24.8K"
-                icon={<FaPlay />}
-              />
-
-              <ProfileStat
-                title="Total Likes"
-                value="8.2K"
-                icon={<FaHeart />}
-              />
-
-              <ProfileStat title="Followers" value="3.7K" icon={<FaUser />} />
-            </div>
-
-            {/* ================= TWO COLUMN ================= */}
-
-            <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1fr_320px]">
-              {/* LEFT */}
-
-              <div className="rounded-xl border border-white/5 bg-[#151517] p-5">
-                <div className="mb-5 flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-bold">Recent Songs</h3>
-
-                    <p className="mt-1 text-[9px] text-gray-500">
-                      Your latest published tracks
-                    </p>
-                  </div>
-
-                  <button className="text-[9px] font-semibold text-violet-400 hover:text-violet-300">
-                    View All
-                  </button>
-                </div>
-
-                <div className="space-y-3">
-                  {recentSongs.map((song) => (
-                    <RecentSong key={song.id} song={song} />
                   ))}
                 </div>
               </div>
 
+              {/* PROFILE BODY */}
+
+              <div className="relative px-9 pb-8">
+                {/* AVATAR */}
+
+                <div className="-mt-[76px] flex items-end justify-between">
+                  <div className="relative">
+                    <div className="h-[150px] w-[150px] rounded-full border-[6px] border-[#171719] bg-[#171719] p-1">
+                      <img
+                        src="https://i.pravatar.cc/300?img=12"
+                        alt="Alex Rivera"
+                        className="h-full w-full rounded-full object-cover"
+                      />
+                    </div>
+
+                    {/* ONLINE */}
+
+                    <div className="absolute bottom-5 right-5 h-5 w-5 rounded-full border-[3px] border-[#171719] bg-green-500" />
+                  </div>
+
+                  {/* EDIT */}
+
+                  <button className="mb-2 flex h-11 items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-6 text-sm font-semibold text-gray-300 transition hover:border-violet-500/40 hover:bg-violet-500/10 hover:text-violet-400">
+                    <FaPen />
+                    Edit Profile
+                  </button>
+                </div>
+
+                {/* NAME */}
+
+                <div className="mt-5">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h2 className="text-3xl font-bold">Alex Rivera</h2>
+
+                    <span className="rounded-full bg-violet-500/15 px-3 py-1.5 text-xs font-semibold text-violet-400">
+                      PRO ARTIST
+                    </span>
+                  </div>
+
+                  <p className="mt-1 text-sm text-gray-500">@alexrivera</p>
+
+                  <p className="mt-5 max-w-3xl text-sm leading-7 text-gray-400">
+                    Independent music artist creating atmospheric electronic
+                    sounds, dreamy synths and late-night melodies. I create
+                    music that feels like a journey through another world.
+                  </p>
+
+                  {/* META */}
+
+                  <div className="mt-6 flex flex-wrap gap-x-7 gap-y-3">
+                    <MetaItem
+                      icon={<FaLocationDot />}
+                      text="Los Angeles, California"
+                    />
+
+                    <MetaItem
+                      icon={<FaCalendarDays />}
+                      text="Joined March 2024"
+                    />
+
+                    <MetaItem icon={<FaLink />} text="alexrivera.music" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ================================================= */}
+            {/* STATS */}
+            {/* ================================================= */}
+
+            <div className="mb-7 grid grid-cols-2 gap-4 lg:grid-cols-4">
+              <BigStat
+                icon={<FaMusic />}
+                title="Total Songs"
+                value="42"
+                change="+6 this month"
+              />
+
+              <BigStat
+                icon={<FaHeadphones />}
+                title="Total Plays"
+                value="24.8K"
+                change="+18.4%"
+              />
+
+              <BigStat
+                icon={<FaHeart />}
+                title="Total Likes"
+                value="8.2K"
+                change="+12.7%"
+              />
+
+              <BigStat
+                icon={<FaUser />}
+                title="Followers"
+                value="3.7K"
+                change="+8.3%"
+              />
+            </div>
+
+            {/* ================================================= */}
+            {/* CONTENT GRID */}
+            {/* ================================================= */}
+
+            <div className="grid grid-cols-1 gap-7 xl:grid-cols-[1fr_380px]">
+              {/* ================================================= */}
+              {/* LEFT */}
+              {/* ================================================= */}
+
+              <div className="space-y-7">
+                {/* RECENT SONGS */}
+
+                <div className="rounded-2xl border border-white/10 bg-[#151517] p-7">
+                  <div className="mb-6 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold">Recent Songs</h3>
+
+                      <p className="mt-1 text-sm text-gray-500">
+                        Your latest published tracks
+                      </p>
+                    </div>
+
+                    <button className="text-sm font-semibold text-violet-400 hover:text-violet-300">
+                      View All
+                    </button>
+                  </div>
+
+                  <div className="space-y-3">
+                    <SongRow
+                      image="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=500&q=80"
+                      title="Midnight Echo"
+                      genre="Synthwave"
+                      plays="1.6K"
+                      likes="342"
+                    />
+
+                    <SongRow
+                      image="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=500&q=80"
+                      title="Rainy Window"
+                      genre="Lo-Fi"
+                      plays="3.2K"
+                      likes="721"
+                    />
+
+                    <SongRow
+                      image="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=500&q=80"
+                      title="Event Horizon"
+                      genre="Ambient"
+                      plays="850"
+                      likes="124"
+                    />
+
+                    <SongRow
+                      image="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=500&q=80"
+                      title="Neon Velocity"
+                      genre="Electronic"
+                      plays="5.4K"
+                      likes="1.1K"
+                    />
+                  </div>
+                </div>
+
+                {/* ABOUT */}
+
+                <div className="rounded-2xl border border-white/10 bg-[#151517] p-7">
+                  <h3 className="text-xl font-bold">About Me</h3>
+
+                  <p className="mt-4 text-sm leading-7 text-gray-400">
+                    I'm an independent artist and music producer passionate
+                    about creating immersive electronic experiences. My music
+                    combines atmospheric textures, synthwave melodies and modern
+                    electronic production.
+                  </p>
+
+                  <p className="mt-3 text-sm leading-7 text-gray-400">
+                    My goal is to create songs that people can connect with
+                    whether they're working late at night, travelling or simply
+                    looking for something different to listen to.
+                  </p>
+
+                  {/* GENRES */}
+
+                  <div className="mt-6">
+                    <p className="mb-3 text-sm font-semibold text-gray-300">
+                      Music Genres
+                    </p>
+
+                    <div className="flex flex-wrap gap-2">
+                      <GenreTag text="Synthwave" />
+                      <GenreTag text="Electronic" />
+                      <GenreTag text="Ambient" />
+                      <GenreTag text="Lo-Fi" />
+                      <GenreTag text="Chill" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ================================================= */}
               {/* RIGHT */}
+              {/* ================================================= */}
 
-              <div className="space-y-5">
-                {/* SOCIALS */}
+              <div className="space-y-7">
+                {/* SOCIAL */}
 
-                <div className="rounded-xl border border-white/5 bg-[#151517] p-5">
-                  <h3 className="text-sm font-bold">Social Links</h3>
+                <div className="rounded-2xl border border-white/10 bg-[#151517] p-7">
+                  <h3 className="text-xl font-bold">Social Links</h3>
 
-                  <p className="mt-1 text-[9px] text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500">
                     Connect with your audience
                   </p>
 
-                  <div className="mt-5 space-y-3">
-                    <SocialLink
+                  <div className="mt-6 space-y-3">
+                    <SocialCard
                       icon={<FaInstagram />}
                       name="Instagram"
                       username="@alexrivera"
                     />
 
-                    <SocialLink
+                    <SocialCard
                       icon={<FaTwitter />}
                       name="Twitter"
                       username="@alexrivera"
                     />
 
-                    <SocialLink
+                    <SocialCard
                       icon={<FaYoutube />}
                       name="YouTube"
                       username="Alex Rivera Music"
@@ -304,22 +351,57 @@ const Profile = () => {
                   </div>
                 </div>
 
-                {/* ABOUT */}
+                {/* TOP SONG */}
 
-                <div className="rounded-xl border border-white/5 bg-[#151517] p-5">
-                  <h3 className="text-sm font-bold">About Artist</h3>
+                <div className="rounded-2xl border border-white/10 bg-[#151517] p-7">
+                  <div className="mb-5 flex items-center gap-2">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
+                      <FaArrowTrendUp />
+                    </div>
 
-                  <p className="mt-3 text-[10px] leading-5 text-gray-500">
-                    Music producer and independent artist focused on electronic,
-                    synthwave and ambient music. Every track is created
-                    independently from my home studio.
-                  </p>
+                    <div>
+                      <h3 className="text-lg font-bold">Top Track</h3>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Tag text="Synthwave" />
-                    <Tag text="Electronic" />
-                    <Tag text="Ambient" />
-                    <Tag text="Lo-Fi" />
+                      <p className="text-xs text-gray-500">
+                        Your most played song
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="overflow-hidden rounded-xl">
+                    <div className="relative h-[210px]">
+                      <img
+                        src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80"
+                        alt="Neon Velocity"
+                        className="h-full w-full object-cover"
+                      />
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+
+                      <button className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-full bg-violet-500 shadow-lg shadow-violet-500/30">
+                        <FaPlay className="ml-0.5 text-sm" />
+                      </button>
+                    </div>
+
+                    <div className="bg-[#101012] p-4">
+                      <h4 className="text-base font-bold">Neon Velocity</h4>
+
+                      <p className="mt-1 text-xs text-gray-500">
+                        Electronic • Cyber City
+                      </p>
+
+                      <div className="mt-4 flex gap-5 text-xs text-gray-500">
+                        <span className="flex items-center gap-2">
+                          <FaEye />
+                          5.4K
+                        </span>
+
+                        <span className="flex items-center gap-2">
+                          <FaHeart />
+                          1.1K
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -332,114 +414,114 @@ const Profile = () => {
 };
 
 /* ================================================= */
-/* NAV ITEM */
+/* META ITEM */
 /* ================================================= */
 
-const NavItem = ({ icon, text, active }) => {
+const MetaItem = ({ icon, text }) => {
   return (
-    <button
-      className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-[10px] transition ${
-        active
-          ? "bg-violet-500 text-white shadow-lg shadow-violet-500/20"
-          : "text-gray-400 hover:bg-white/5 hover:text-white"
-      }`}
-    >
-      <span className="text-[9px]">{icon}</span>
+    <div className="flex items-center gap-2 text-sm text-gray-500">
+      <span className="text-violet-400">{icon}</span>
 
       {text}
-    </button>
+    </div>
   );
 };
 
 /* ================================================= */
-/* PROFILE STAT */
+/* BIG STAT */
 /* ================================================= */
 
-const ProfileStat = ({ title, value, icon }) => {
+const BigStat = ({ icon, title, value, change }) => {
   return (
-    <div className="rounded-xl border border-white/5 bg-[#151517] p-4">
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
+    <div className="rounded-2xl border border-white/10 bg-[#151517] p-5 transition hover:border-violet-500/30">
+      <div className="flex items-start justify-between">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400">
           {icon}
         </div>
 
-        <div>
-          <p className="text-[8px] text-gray-500">{title}</p>
-
-          <p className="mt-0.5 text-base font-bold">{value}</p>
-        </div>
+        <span className="text-xs font-semibold text-green-400">{change}</span>
       </div>
+
+      <p className="mt-5 text-sm text-gray-500">{title}</p>
+
+      <p className="mt-1 text-2xl font-bold">{value}</p>
     </div>
   );
 };
 
 /* ================================================= */
-/* RECENT SONG */
+/* SONG ROW */
 /* ================================================= */
 
-const RecentSong = ({ song }) => {
+const SongRow = ({ image, title, genre, plays, likes }) => {
   return (
-    <div className="group flex items-center gap-3 rounded-lg border border-transparent p-2 transition hover:border-white/5 hover:bg-white/[0.02]">
-      <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md">
+    <div className="group flex items-center gap-4 rounded-xl border border-transparent p-3 transition hover:border-white/10 hover:bg-white/[0.025]">
+      {/* IMAGE */}
+
+      <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg">
         <img
-          src={song.image}
-          alt={song.title}
-          className="h-full w-full object-cover"
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover transition duration-300 group-hover:scale-110"
         />
 
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition group-hover:opacity-100">
-          <FaPlay className="text-[9px]" />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition group-hover:opacity-100">
+          <FaPlay className="text-sm" />
         </div>
       </div>
+
+      {/* INFO */}
 
       <div className="min-w-0 flex-1">
-        <h4 className="truncate text-[10px] font-semibold">{song.title}</h4>
+        <h4 className="truncate text-sm font-semibold">{title}</h4>
 
-        <p className="mt-1 text-[8px] text-gray-600">{song.genre}</p>
+        <p className="mt-1 text-xs text-gray-500">{genre}</p>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-1 text-[8px] text-gray-600">
-          <FaEye />
-          {song.plays}
-        </div>
+      {/* STATS */}
 
-        <div className="flex items-center gap-1 text-[8px] text-gray-600">
+      <div className="hidden items-center gap-6 sm:flex">
+        <span className="flex items-center gap-2 text-xs text-gray-500">
+          <FaEye />
+          {plays}
+        </span>
+
+        <span className="flex items-center gap-2 text-xs text-gray-500">
           <FaHeart />
-          {song.likes}
-        </div>
+          {likes}
+        </span>
       </div>
     </div>
   );
 };
 
 /* ================================================= */
-/* SOCIAL LINK */
+/* SOCIAL CARD */
 /* ================================================= */
 
-const SocialLink = ({ icon, name, username }) => {
+const SocialCard = ({ icon, name, username }) => {
   return (
-    <button className="flex w-full items-center gap-3 rounded-lg border border-white/5 bg-white/[0.02] p-3 text-left transition hover:border-violet-500/30 hover:bg-violet-500/5">
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
+    <button className="flex w-full items-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-left transition hover:border-violet-500/40 hover:bg-violet-500/5">
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10 text-lg text-violet-400">
         {icon}
       </div>
 
       <div>
-        <p className="text-[9px] font-semibold">{name}</p>
+        <p className="text-sm font-semibold">{name}</p>
 
-        <p className="mt-0.5 text-[8px] text-gray-600">{username}</p>
+        <p className="mt-1 text-xs text-gray-500">{username}</p>
       </div>
     </button>
   );
 };
 
 /* ================================================= */
-/* TAG */
+/* GENRE TAG */
 /* ================================================= */
 
-const Tag = ({ text }) => {
+const GenreTag = ({ text }) => {
   return (
-    <span className="rounded-full border border-violet-500/20 bg-violet-500/5 px-2.5 py-1 text-[7px] text-violet-400">
+    <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-4 py-2 text-xs font-medium text-violet-300">
       {text}
     </span>
   );

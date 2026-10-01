@@ -156,9 +156,6 @@ const Dashboard = () => {
                   </p>
                 </div>
 
-                <button className="text-xs font-semibold text-violet-400 transition hover:text-violet-300">
-                  View All
-                </button>
               </div>
 
               {/* Song Cards */}
