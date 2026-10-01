@@ -15,9 +15,11 @@ import { useNavigate } from "react-router";
 const Register = () => {
   const [role, setRole] = useState("listener");
   const [formData, setFormData] = useState({ role });
-  const formRef = useRef(null)
+  const formRef = useRef(null);
 
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("userData"));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,8 +29,12 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("userData", JSON.stringify(formData));
-    formRef.current.reset()
-    navigate("/main")
+    formRef.current.reset();
+
+    if (user.role === "listener") {
+      navigate("/main/discover");
+    }
+    navigate("/main");
   };
 
   return (

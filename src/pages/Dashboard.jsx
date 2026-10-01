@@ -5,53 +5,16 @@ import {
   FaCompactDisc,
   FaPen,
   FaTrash,
-  FaEye,
   FaPlus,
   FaBell,
+  FaPlay,
 } from "react-icons/fa6";
 import AsideNav from "../components/AsideNav";
 
-const songs = [
-  {
-    id: 1,
-    title: "Midnight Echo",
-    genre: "Synthwave",
-    date: "May 12, 2026",
-    plays: "1.6k",
-    image:
-      "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 2,
-    title: "Rainy Window",
-    genre: "Lo-Fi",
-    date: "Apr 28, 2026",
-    plays: "3.2k",
-    image:
-      "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 3,
-    title: "Event Horizon",
-    genre: "Ambient",
-    date: "Mar 15, 2026",
-    plays: "850",
-    image:
-      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 4,
-    title: "Neon Velocity",
-    genre: "Techno",
-    date: "Feb 20, 2026",
-    plays: "5.4k",
-    image:
-      "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=600&q=80",
-  },
-  
-];
-
+const songs = JSON.parse(localStorage.getItem("songsData")) || []
 const Dashboard = () => {
+
+
   return (
     <div className="h-full bg-[#0b0b0d] text-white">
       {/* MAIN WRAPPER */}
@@ -134,7 +97,7 @@ const Dashboard = () => {
 
             {/* ================= STATS ================= */}
             <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <StatCard icon={<FaMusic />} title="Total Songs" value="42" />
+              <StatCard icon={<FaMusic />} title="Total Songs" value={songs.length} />
 
               <StatCard icon={<FaHeart />} title="Total Likes" value="8.2k" />
 
@@ -161,7 +124,7 @@ const Dashboard = () => {
               {/* Song Cards */}
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
                 {songs.map((song) => (
-                  <SongCard key={song.id} song={song} />
+                  <SongCard key={song.title} song={song} />
                 ))}
               </div>
             </div>
@@ -225,51 +188,73 @@ const StatCard = ({ icon, title, value }) => {
 
 const SongCard = ({ song }) => {
   return (
-    <div className="group overflow-hidden rounded-xl border border-white/10 bg-[#151517] transition duration-300 hover:-translate-y-1 hover:border-violet-500/30">
-      {/* Image */}
-      <div className="relative h-[190px] overflow-hidden">
+    <div className="group overflow-hidden rounded-2xl border border-white/5 bg-[#151517] transition duration-300 hover:-translate-y-1 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/5">
+      {/* IMAGE */}
+      <div className="relative h-[230px] overflow-hidden">
         <img
-          src={song.image}
-          alt={song.title}
+          src={song.albumCover}
+          alt={song.songTitle}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
 
         {/* Genre */}
-        <span className="absolute right-3 top-3 rounded-md border border-white/10 bg-black/50 px-2 py-1 text-[9px] font-semibold uppercase text-violet-300 backdrop-blur-md">
+        <span className="absolute left-4 top-4 rounded-lg border border-white/10 bg-black/50 px-3 py-1.5 text-xs font-semibold text-violet-300 backdrop-blur-md">
           {song.genre}
         </span>
 
-        {/* Play */}
-        <button className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-full bg-violet-500 opacity-0 shadow-lg shadow-violet-500/30 transition group-hover:opacity-100">
-          ▶
+        {/* Play Button */}
+        <button className="absolute bottom-4 left-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-violet-500 text-white opacity-0 shadow-lg shadow-violet-500/30 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          <FaPlay className="ml-0.5 text-sm" />
         </button>
       </div>
 
-      {/* Details */}
-      <div className="p-4">
-        <h4 className="truncate text-sm font-bold">{song.title}</h4>
+      {/* DETAILS */}
+      <div className="p-5">
+        {/* Title + Artist */}
+        <div className="min-w-0">
+          <h3 className="truncate text-lg font-bold text-white">
+            {song.songTitle}
+          </h3>
 
-        <p className="mt-1 text-[10px] text-gray-500">Uploaded {song.date}</p>
+          <p className="mt-1 truncate text-sm text-gray-400">
+            {song.artistName}
+          </p>
+        </div>
 
-        {/* Bottom */}
-        <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
-          <div className="flex gap-3">
-            <button className="text-gray-500 transition hover:text-violet-400">
-              <FaPen className="text-xs" />
-            </button>
+        {/* Description */}
+        {song.description && (
+          <p className="mt-3 line-clamp-2 text-sm text-gray-500">
+            {song.description}
+          </p>
+        )}
 
-            <button className="text-gray-500 transition hover:text-red-400">
-              <FaTrash className="text-xs" />
-            </button>
-          </div>
+        {/* Genre */}
+        <div className="mt-4 flex items-center">
+          <span className="rounded-md bg-violet-500/10 px-2.5 py-1 text-xs font-medium text-violet-400">
+            {song.genre}
+          </span>
+        </div>
 
-          <div className="flex items-center gap-1 text-[10px] text-gray-500">
-            <FaEye />
-            {song.plays}
-          </div>
+        {/* Audio URL */}
+        <div className="mt-4 border-t border-white/5 pt-4">
+          <p className="truncate text-xs text-gray-600">
+            Audio: {song.audioUrl}
+          </p>
+        </div>
+
+        {/* Actions */}
+        <div className="mt-4 flex gap-3">
+          <button className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-400 transition hover:bg-violet-500/10 hover:text-violet-400">
+            <FaPen />
+            Edit
+          </button>
+
+          <button className="flex h-10 w-11 items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-500 transition hover:bg-red-500/10 hover:text-red-400">
+            <FaTrash />
+          </button>
         </div>
       </div>
     </div>

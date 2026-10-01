@@ -6,7 +6,7 @@ const Navbar = () => {
   const navItems = [
     {
       name: "Home",
-      path: "/main",
+      path: "/main/discover",
     },
     {
       name: "Favorites",

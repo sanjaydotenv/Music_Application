@@ -7,8 +7,7 @@ import Discover from "../pages/Discover";
 import Favorites from "../pages/Favorites";
 import { artistRoutes, userRoutes } from "../routes/allRoutes";
 
-const user = JSON.parse(localStorage.getItem("userData"))
-console.log(user)
+const user = JSON.parse(localStorage.getItem("userData"));
 
 const router = createBrowserRouter([
   {
@@ -28,7 +27,7 @@ const router = createBrowserRouter([
   {
     path: "/main",
     element: <MainLayout />,
-    children: user.role === "artist" ? [...artistRoutes] : [...userRoutes],
+    children: user?.role === "artist" ? [...artistRoutes] : [...userRoutes],
   },
 ]);
 

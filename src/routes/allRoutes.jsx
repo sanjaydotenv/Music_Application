@@ -7,7 +7,7 @@ import UploadSong from "../pages/UploadSong";
 
 export const userRoutes = [
   {
-    path: "",
+    path: "discover",
     element: <Discover />,
   },
   {
