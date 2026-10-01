@@ -1,6 +1,8 @@
 import Dashboard from "../pages/Dashboard";
 import Discover from "../pages/Discover";
 import Favorites from "../pages/Favorites";
+import MySongs from "../pages/MySongs";
+import Profile from "../pages/Profile";
 import UploadSong from "../pages/UploadSong";
 
 export const userRoutes = [
@@ -22,5 +24,13 @@ export const artistRoutes = [
     {
         path: "uploadSong",
         element: <UploadSong />
+    },
+    {
+      path: "/main/songs",
+      element: <MySongs />
+    },
+    {
+      path: "/main/profile",
+      element:<Profile />
     }
 ];

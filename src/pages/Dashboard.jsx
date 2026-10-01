@@ -1,10 +1,6 @@
 import React from "react";
 import {
-  FaChartBar,
   FaMusic,
-  FaCloudArrowUp,
-  FaUser,
-  FaRightFromBracket,
   FaHeart,
   FaCompactDisc,
   FaPen,
@@ -13,7 +9,7 @@ import {
   FaPlus,
   FaBell,
 } from "react-icons/fa6";
-import { useNavigate } from "react-router";
+import AsideNav from "../components/AsideNav";
 
 const songs = [
   {
@@ -56,50 +52,12 @@ const songs = [
 ];
 
 const Dashboard = () => {
-    const navigate = useNavigate()
   return (
     <div className="h-full bg-[#0b0b0d] text-white">
       {/* MAIN WRAPPER */}
       <div className="flex min-h-screen">
         {/* ================= SIDEBAR ================= */}
-        <aside className="fixed left-0 top-0 z-50 flex h-screen w-[240px] flex-col border-r border-white/10 bg-[#111113] px-5 py-7">
-          {/* Logo */}
-          <div className="mb-10">
-            <h1 className="text-xl font-bold tracking-wide text-white">
-              Music<span className="text-violet-400">Hub</span>
-            </h1>
-
-            <p className="mt-1 text-xs text-gray-500">Artist Studio</p>
-          </div>
-
-          {/* Artist */}
-          <div className="mb-7 rounded-xl border border-white/5 bg-white/[0.03] p-3">
-            <p className="text-sm font-semibold text-white">Alex Morgan</p>
-
-            <p className="mt-1 text-[11px] text-gray-500">Creator Account</p>
-          </div>
-
-          {/* Navigation */}
-          <nav className="space-y-2">
-            <NavItem icon={<FaChartBar />} text="Dashboard" active />
-
-            <NavItem icon={<FaMusic />} text="My Songs" />
-
-            <div onClick={() => navigate("/main/uploadSong")}>
-                <NavItem icon={<FaCloudArrowUp />} text="Upload Song" />
-            </div>
-
-            <NavItem icon={<FaUser />} text="Profile" />
-          </nav>
-
-          {/* Bottom Logout */}
-          <div className="mt-auto">
-            <button className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm text-gray-400 transition hover:bg-red-500/10 hover:text-red-400">
-              <FaRightFromBracket className="text-xs" />
-              Logout
-            </button>
-          </div>
-        </aside>
+        <AsideNav />
 
         {/* ================= CONTENT ================= */}
         <main className="ml-[240px] flex-1">
@@ -248,21 +206,7 @@ const Dashboard = () => {
 
 /* ================= COMPONENTS ================= */
 
-const NavItem = ({ icon, text, active }) => {
-  return (
-    <button
-      className={`flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm transition ${
-        active
-          ? "bg-violet-500 text-white shadow-lg shadow-violet-500/20"
-          : "text-gray-400 hover:bg-white/5 hover:text-white"
-      }`}
-    >
-      <span className="text-sm">{icon}</span>
 
-      <span>{text}</span>
-    </button>
-  );
-};
 
 const StatCard = ({ icon, title, value }) => {
   return (
