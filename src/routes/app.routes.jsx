@@ -5,7 +5,10 @@ import Login from "../pages/Login";
 import MainLayout from "../layout/MainLayout";
 import Discover from "../pages/Discover";
 import Favorites from "../pages/Favorites";
-import Search from "../pages/Search";
+import { artistRoutes, userRoutes } from "../routes/allRoutes";
+
+const user = JSON.parse(localStorage.getItem("userData"))
+console.log(user)
 
 const router = createBrowserRouter([
   {
@@ -25,20 +28,7 @@ const router = createBrowserRouter([
   {
     path: "/main",
     element: <MainLayout />,
-    children: [
-      {
-        path: "",
-        element: <Discover />,
-      },
-      {
-        path: "favorite",
-        element: <Favorites />,
-      },
-      {
-        path: "search",
-        element: <Search />,
-      },
-    ],
+    children: user.role === "artist" ? [...artistRoutes] : [...userRoutes],
   },
 ]);
 
