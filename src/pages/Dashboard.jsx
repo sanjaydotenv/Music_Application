@@ -10,11 +10,10 @@ import {
   FaPlay,
 } from "react-icons/fa6";
 import AsideNav from "../components/AsideNav";
+import { href, redirect } from "react-router";
 
-const songs = JSON.parse(localStorage.getItem("songsData")) || []
+const songs = JSON.parse(localStorage.getItem("songsData")) || [];
 const Dashboard = () => {
-
-
   return (
     <div className="h-full bg-[#0b0b0d] text-white">
       {/* MAIN WRAPPER */}
@@ -97,7 +96,11 @@ const Dashboard = () => {
 
             {/* ================= STATS ================= */}
             <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <StatCard icon={<FaMusic />} title="Total Songs" value={songs.length} />
+              <StatCard
+                icon={<FaMusic />}
+                title="Total Songs"
+                value={songs.length}
+              />
 
               <StatCard icon={<FaHeart />} title="Total Likes" value="8.2k" />
 
@@ -118,13 +121,12 @@ const Dashboard = () => {
                     Manage your published discography
                   </p>
                 </div>
-
               </div>
 
               {/* Song Cards */}
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
                 {songs.map((song) => (
-                  <SongCard key={song.title} song={song} />
+                  <SongCard key={song.songTitle} song={song} />
                 ))}
               </div>
             </div>
@@ -166,8 +168,6 @@ const Dashboard = () => {
 
 /* ================= COMPONENTS ================= */
 
-
-
 const StatCard = ({ icon, title, value }) => {
   return (
     <div className="group rounded-xl border border-white/10 bg-[#151517] p-5 transition hover:border-violet-500/30 hover:bg-[#19191c]">
@@ -188,7 +188,12 @@ const StatCard = ({ icon, title, value }) => {
 
 const SongCard = ({ song }) => {
   return (
-    <div className="group overflow-hidden rounded-2xl border border-white/5 bg-[#151517] transition duration-300 hover:-translate-y-1 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/5">
+    <div
+      onClick={() => {
+        window.open(song.audioUrl)
+      }}
+      className="group overflow-hidden rounded-2xl border border-white/5 bg-[#151517] transition duration-300 hover:-translate-y-1 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/5"
+    >
       {/* IMAGE */}
       <div className="relative h-[230px] overflow-hidden">
         <img
