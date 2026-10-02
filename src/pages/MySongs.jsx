@@ -129,7 +129,11 @@ const MySongs = () => {
             {/* ================= STATS ================= */}
 
             <div className="mb-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-              <MiniStat icon={<FaMusic />} title="Total Songs" value={songsData.length} />
+              <MiniStat
+                icon={<FaMusic />}
+                title="Total Songs"
+                value={songsData.length}
+              />
 
               <MiniStat icon={<FaPlay />} title="Total Plays" value="24.8K" />
 
@@ -160,8 +164,8 @@ const MySongs = () => {
 
             <div className="grid grid-cols-4 gap-5">
               {songsData.map((song) => {
-              return <SongCard key={song.songTitle} song={song} />;
-            })}
+                return <SongCard key={song.songTitle} song={song} />;
+              })}
             </div>
 
             {/* ================= SONG GRID ================= */}
@@ -259,11 +263,6 @@ const SongCard = ({ song }) => {
 
         {/* Actions */}
         <div className="mt-4 flex gap-3">
-          <button className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-400 transition hover:bg-violet-500/10 hover:text-violet-400">
-            <FaPen />
-            Edit
-          </button>
-
           <button className="flex h-10 w-11 items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-500 transition hover:bg-red-500/10 hover:text-red-400">
             <FaTrash />
           </button>

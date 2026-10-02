@@ -261,11 +261,6 @@ const SongCard = ({ song }) => {
 
         {/* Actions */}
         <div className="mt-4 flex gap-3">
-          <button className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-400 transition hover:bg-violet-500/10 hover:text-violet-400">
-            <FaPen />
-            Edit
-          </button>
-
           <button
             onClick={() => handleDelete(song)}
             className="flex h-10 w-11 items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-500 transition hover:bg-red-500/10 hover:text-red-400"
