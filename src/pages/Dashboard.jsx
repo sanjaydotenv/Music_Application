@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaMusic,
   FaHeart,
@@ -10,9 +10,9 @@ import {
   FaPlay,
 } from "react-icons/fa6";
 import AsideNav from "../components/AsideNav";
-import { href, redirect } from "react-router";
 
 const songs = JSON.parse(localStorage.getItem("songsData")) || [];
+
 const Dashboard = () => {
   return (
     <div className="h-full bg-[#0b0b0d] text-white">
@@ -187,13 +187,16 @@ const StatCard = ({ icon, title, value }) => {
 };
 
 const SongCard = ({ song }) => {
+  const handleDelete = (song) => {
+    const filteredSongs = songs.filter(
+      (sng) => sng.songTitle !== song.songTitle,
+    );
+    localStorage.setItem("songsData", JSON.stringify(filteredSongs));
+    window.location.reload();
+  };
+
   return (
-    <div
-      onClick={() => {
-        window.open(song.audioUrl)
-      }}
-      className="group overflow-hidden rounded-2xl border border-white/5 bg-[#151517] transition duration-300 hover:-translate-y-1 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/5"
-    >
+    <div className="group overflow-hidden rounded-2xl border border-white/5 bg-[#151517] transition duration-300 hover:-translate-y-1 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/5">
       {/* IMAGE */}
       <div className="relative h-[230px] overflow-hidden">
         <img
@@ -211,7 +214,13 @@ const SongCard = ({ song }) => {
         </span>
 
         {/* Play Button */}
-        <button className="absolute bottom-4 left-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-violet-500 text-white opacity-0 shadow-lg shadow-violet-500/30 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <button
+          onClick={() => {
+            console.log(song.audioUrl)
+            window.open(song.audioUrl);
+          }}
+          className="absolute bottom-4 left-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-violet-500 text-white opacity-0 shadow-lg shadow-violet-500/30 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+        >
           <FaPlay className="ml-0.5 text-sm" />
         </button>
       </div>
@@ -257,7 +266,10 @@ const SongCard = ({ song }) => {
             Edit
           </button>
 
-          <button className="flex h-10 w-11 items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-500 transition hover:bg-red-500/10 hover:text-red-400">
+          <button
+            onClick={() => handleDelete(song)}
+            className="flex h-10 w-11 items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-500 transition hover:bg-red-500/10 hover:text-red-400"
+          >
             <FaTrash />
           </button>
         </div>

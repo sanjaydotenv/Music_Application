@@ -160,7 +160,7 @@ const MySongs = () => {
 
             <div className="grid grid-cols-4 gap-5">
               {songsData.map((song) => {
-              return <SongCard song={song} />;
+              return <SongCard key={song.songTitle} song={song} />;
             })}
             </div>
 
